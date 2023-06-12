@@ -47,7 +47,7 @@ const express = require("express");
 const cors = require("cors");
 const { connection } = require("./config/db");
 require("dotenv").config();
-const { TODO_Route } = require("./routes/TODO.route");
+
 const { TODOModel } = require("./model/TODO.model");
 let app = express();
 app.use(express.json());
@@ -125,7 +125,7 @@ app.delete("/todo/delete/:id", async (req, res) => {
 
     try {
         await TODOModel.findByIdAndDelete(req.params.id);
-        res.status(200).json("Post has been deleted");
+        res.status(200).json("TODO has been deleted");
     } catch (err) {
         return res.status(500).json(err);
     }
@@ -166,7 +166,7 @@ app.put("/todo/:id", async (req, res) => {
         const user = await TODOModel.findByIdAndUpdate(post_id, {
           $set: obj,
         });
-        res.status(200).json("Account has been updated");
+        res.status(200).json(`TODO has been updated`);
       } catch (err) {
         return res.status(500).json(err);
       }
