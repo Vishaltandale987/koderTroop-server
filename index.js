@@ -134,16 +134,17 @@ app.delete("/todo/delete/:id", async (req, res) => {
 
 //make imp  jPx9pjcLMIHIqilEyUhDh7xO1dY5Mfb4
 
-app.put("/todo/imp", async (req, res) => {
+app.put("/todo/imp/:id", async (req, res) => {
+  let todo_id = req.params.id
 
-    const {seatid} = req.body;
+    const {imp} = req.body;
 
-    const update = { $set: { status: "available"} };
+    const update = { $set: { important: imp} };
 
  
     try {
-        const user = await TODOModel.findByIdAndUpdate(seatid, update);
-        res.status(200).json("Booking Successfully cancel");
+        const user = await TODOModel.findByIdAndUpdate(todo_id, update);
+        res.status(200).json("Tast status Successfully change.");
     } catch (err) {
         return res.status(500).json(err);
     }
@@ -152,7 +153,7 @@ app.put("/todo/imp", async (req, res) => {
 
 
 
-
+// Edit
 app.put("/todo/:id", async (req, res) => {
 
     let post_id = req.params.id
